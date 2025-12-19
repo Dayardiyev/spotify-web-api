@@ -1,26 +1,48 @@
 import Header from "./components/Header/Header.tsx";
-import {useState} from "react";
-import TracksList from "./components/TracksList/TracksList.tsx";
+import {useEffect, useRef, useState} from "react";
 import {Routes, Route} from 'react-router-dom';
-import {recentTracks, topTracks} from "./utils/mockData.ts";
+import {getAccessToken, getToken, saveToken} from "./utils/auth.ts";
+import TopTracks from "./features/TopTracks";
+import RecentTracks from "./features/RecentTracks";
 
 function App() {
-    const [user, setUser] = useState<boolean>(true);
+    const [user, setUser] = useState<boolean>(() => {
+        return !!getAccessToken();
+    });
+    const authCalled = useRef(false);
+
+    useEffect(() => {
+        const hash = window.location.search;
+        const code = new URLSearchParams(hash).get("code");
+
+        if (code && !authCalled.current) {
+            authCalled.current = true;
+            
+            getToken(code).then(data => {
+                saveToken(data);
+                setUser(true);
+                window.history.pushState({}, "", "/");
+            }).catch(e => {
+                console.error("Auth error", e);
+                authCalled.current = false;
+            });
+        }
+    }, []);
 
     return (
 
         <>
             <div className='w-[80%] border m-auto grid'>
-                <Header user={user} setUser={setUser}/>
+                <Header user={user}/>
                 <section className='mb-8 mx-16'>
                     <Routes>
                         <Route
                             path="/topTracks"
-                            element={user ? <TracksList key="top" tracks={topTracks} /> : 'Sign in to see the data'}
+                            element={user ? <TopTracks /> : 'Sign in to see the data'}
                         />
                         <Route
                             path="/recentTracks"
-                            element={user ? <TracksList key="recent" tracks={recentTracks} showPlayedAt /> : 'Sign in to see the data'}
+                            element={user ? <RecentTracks /> : 'Sign in to see the data'}
                         />
                     </Routes>
                 </section>
