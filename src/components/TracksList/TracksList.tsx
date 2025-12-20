@@ -10,15 +10,15 @@ export default function TracksList({tracks, showPlayedAt = false}: TracksListPro
     return (
         <div>
             <ul className="grid gap-5">
-                {tracks.map((item) => {
+                {tracks.map((item, index) => {
                     if (showPlayedAt) {
                         const recent = item as RecentTrack;
-                        return <TrackComponent key={`recent-${recent.track.id}`}
+                        return <TrackComponent key={`${recent.played_at}-${recent.track.id}-${index}`}
                                                track={recent.track}
                                                played_at={recent.played_at}/>;
                     } else {
                         const track = item as Track;
-                        return <TrackComponent key={track.id} track={track}/>;
+                        return <TrackComponent key={`${track.id}-${index}`} track={track}/>;
                     }
                 })}
             </ul>

@@ -16,20 +16,24 @@ export default function Track({track, played_at}: TrackProps) {
         artists.map(artist => artist.name)
     ), [])
 
-    const handleImageClick = () => {
+    const handleImageClick = useCallback(() => {
         setIsModalOpen(true);
-    };
+    }, []);
 
-    const handleCloseModal = () => {
+    const handleCloseModal = useCallback(() => {
         setIsModalOpen(false);
-    };
+    }, []);
+
+    if (!album || !album.images || album.images.length === 0) {
+        return null;
+    }
 
     return (
         <li>
             <article className='px-5 py-6 shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex gap-5'>
                 <div>
                     <img 
-                        src={album.images[1].url} 
+                        src={album.images[1]?.url || album.images[0]?.url} 
                         className='h-30 cursor-pointer hover:opacity-80 transition-opacity duration-200' 
                         alt={album.name}
                         onClick={handleImageClick}
