@@ -39,11 +39,11 @@ function App() {
                     <Routes>
                         <Route
                             path="/topTracks"
-                            element={user ? <TracksPage endpoint={GET_TOP_TRACKS}/> : 'Sign in to see the data'}
+                            element={user ? <TracksPage key="top-tracks" endpoint={GET_TOP_TRACKS}/> : 'Sign in to see the data'}
                         />
                         <Route
                             path="/recentTracks"
-                            element={user ? <TracksPage endpoint={GET_RECENT_TRACKS} showPlayedAt/> : 'Sign in to see the data'}
+                            element={user ? <TracksPage key="recent-tracks" endpoint={GET_RECENT_TRACKS} showPlayedAt/> : 'Sign in to see the data'}
                         />
                     </Routes>
                 </section>
