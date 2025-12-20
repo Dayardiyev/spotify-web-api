@@ -1,4 +1,5 @@
 import {NavLink} from 'react-router-dom';
+import clsx from 'clsx';
 import {getAuthUrl} from "../../utils/auth.ts";
 
 interface HeaderProps {
@@ -15,7 +16,9 @@ export default function Header({user}: HeaderProps) {
                             <li>
                                 <NavLink
                                     to="/topTracks"
-                                    className={({isActive}) => isActive ? "underline" : ""}
+                                    className={({isActive}) => clsx({
+                                        "underline": isActive
+                                    })}
                                 >
                                     Top Tracks
                                 </NavLink>
@@ -23,7 +26,9 @@ export default function Header({user}: HeaderProps) {
                             <li>
                                 <NavLink
                                     to="/recentTracks"
-                                    className={({isActive}) => isActive ? "underline" : ""}
+                                    className={({isActive}) => clsx({
+                                        "underline": isActive
+                                    })}
                                 >
                                     Recent Tracks
                                 </NavLink>
