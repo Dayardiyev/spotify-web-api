@@ -2,8 +2,9 @@ import Header from "./components/Header/Header.tsx";
 import {useEffect, useRef, useState} from "react";
 import {Routes, Route} from 'react-router-dom';
 import {getAccessToken, getToken, saveToken} from "./utils/auth.ts";
-import TopTracks from "./features/TopTracks";
-import RecentTracks from "./features/RecentTracks";
+import TracksPage from "./components/TracksPage/TracksPage.tsx";
+import {GET_RECENT_TRACKS, GET_TOP_TRACKS} from "./config.ts";
+
 
 function App() {
     const [user, setUser] = useState<boolean>(() => {
@@ -17,7 +18,7 @@ function App() {
 
         if (code && !authCalled.current) {
             authCalled.current = true;
-            
+
             getToken(code).then(data => {
                 saveToken(data);
                 setUser(true);
@@ -38,11 +39,11 @@ function App() {
                     <Routes>
                         <Route
                             path="/topTracks"
-                            element={user ? <TopTracks /> : 'Sign in to see the data'}
+                            element={user ? <TracksPage endpoint={GET_TOP_TRACKS}/> : 'Sign in to see the data'}
                         />
                         <Route
                             path="/recentTracks"
-                            element={user ? <RecentTracks /> : 'Sign in to see the data'}
+                            element={user ? <TracksPage endpoint={GET_RECENT_TRACKS} showPlayedAt/> : 'Sign in to see the data'}
                         />
                     </Routes>
                 </section>

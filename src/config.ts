@@ -10,3 +10,6 @@ export const SCOPES = [
 ];
 
 export const CLIENT_SECRET = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
+
+export const GET_TOP_TRACKS = "https://api.spotify.com/v1/me/top/tracks";
+export const GET_RECENT_TRACKS = "https://api.spotify.com/v1/me/player/recently-played";
