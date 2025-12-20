@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import {getAuthUrl} from "../../utils/auth.ts";
 
 interface HeaderProps {
@@ -12,8 +12,22 @@ export default function Header({user}: HeaderProps) {
                 : (
                     <nav>
                         <ul className='flex gap-5'>
-                            <li><Link to="/topTracks">Top Tracks</Link></li>
-                            <li><Link to="/recentTracks">Recent Tracks</Link></li>
+                            <li>
+                                <NavLink
+                                    to="/topTracks"
+                                    className={({isActive}) => isActive ? "underline" : ""}
+                                >
+                                    Top Tracks
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/recentTracks"
+                                    className={({isActive}) => isActive ? "underline" : ""}
+                                >
+                                    Recent Tracks
+                                </NavLink>
+                            </li>
                         </ul>
                     </nav>
                 )
