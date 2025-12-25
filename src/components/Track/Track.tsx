@@ -13,7 +13,7 @@ export default function Track({track, played_at}: TrackProps) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const getArtistName = useCallback((artists: Artist[]) => (
-        artists.map(artist => artist.name)
+        artists.map(artist => artist.name).join(', ')
     ), [])
 
     const handleImageClick = useCallback(() => {
