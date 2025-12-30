@@ -33,7 +33,7 @@ function App() {
     return (
 
         <>
-            <div className='w-[80%] border m-auto grid'>
+            <div className='w-[80%] m-auto grid'>
                 <Header user={user}/>
                 <section className='mb-8 mx-16'>
                     <Routes>
