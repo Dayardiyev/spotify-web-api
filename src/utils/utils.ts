@@ -1,4 +1,6 @@
-export function durationFormat(duration_ms: number): string {
+import type {Artist} from "../model/types.ts";
+
+export const durationFormat = (duration_ms: number): string => {
     const totalSeconds = Math.floor(duration_ms / 1000);
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
@@ -7,7 +9,7 @@ export function durationFormat(duration_ms: number): string {
 }
 
 
-export function dateFormat(datetime?: string): string {
+export const playedAgoFormat = (datetime?: string): string => {
     if (!datetime) return '';
 
     const date = new Date(datetime);
@@ -47,3 +49,27 @@ export function dateFormat(datetime?: string): string {
     const years = Math.floor(months / 12);
     return `${years} year${years === 1 ? "" : "s"} ago`;
 }
+
+export const getArtistName = (artists: Artist[]): string => {
+    return artists.map(artist => artist.name).join(', ');
+}
+
+export const releaseDateFormat = (releaseDate: string): string => {
+    const date = new Date(releaseDate);
+
+    const parts = new Intl.DateTimeFormat("en-EN", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    }).formatToParts(date);
+
+    const year = parts.find(p => p.type === "year")?.value;
+    const month = parts.find(p => p.type === "month")?.value;
+    const day = parts.find(p => p.type === "day")?.value;
+
+    if (!year || !month || !day) {
+        return "";
+    }
+
+    return `${year} ${month} ${day}`;
+};
