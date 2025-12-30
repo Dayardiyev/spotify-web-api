@@ -1,7 +1,7 @@
 import type {Track as TrackType} from '../../model/types';
 import {useCallback, useState} from "react";
 import {playedAgoFormat, getArtistName} from "../../utils/utils.ts";
-import {TrackDetailsModal} from '../ImageModal/TrackDetailsModal.tsx';
+import {TrackDetailsModal} from '../TrackDetailsModal/TrackDetailsModal.tsx';
 
 type TrackProps = {
     "track": TrackType,
