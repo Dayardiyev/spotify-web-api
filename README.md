@@ -1,73 +1,51 @@
-# React + TypeScript + Vite
+<img src="public/spotify-logo.svg" width="120" alt="Spotify logo" />
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Spotify Web API Explorer
 
-Currently, two official plugins are available:
+React + Vite app that connects to the Spotify Web API. After authenticating with your Spotify account you can browse:
+- **Top Tracks** (most played)
+  ![1.jpeg](images/1.jpeg)
+- **Recently Played** tracks with “played X minutes ago”
+  ![2.jpeg](images/2.jpeg)
+- Track detail modal with album art, duration, and “Open in Spotify” link
+  ![3.jpeg](images/3.jpeg)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech stack
+- React 19, TypeScript, Vite, React Router
+- Tailwind CSS 4
+- Spotify Authorization Code flow
 
-## React Compiler
+## Prerequisites
+- Node.js 18+ and npm
+- A Spotify Developer app (https://developer.spotify.com/dashboard) with **Client ID**, **Client Secret**, and a Redirect URI matching your local/dev URL (e.g. `http://localhost:5173`)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Environment variables
+Create a `.env` file in the project root (Vite requires the `VITE_` prefix):
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash path=null start=null
+VITE_SPOTIFY_CLIENT_ID=your_client_id
+VITE_SPOTIFY_CLIENT_SECRET=your_client_secret
+VITE_SPOTIFY_REDIRECT_URI=http://localhost:5173
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Also add the same redirect URI in your Spotify app settings.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Getting started
+1. Install dependencies  
+   ```bash path=null start=null
+   npm install
+   ```
+2. Start the dev server  
+   ```bash path=null start=null
+   npm run dev
+   ```
+   Vite will print a local URL (default `http://localhost:5173`). Open it and click **Login with Spotify** to authorize.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Available scripts
+- `npm run dev` – start Vite dev server
+- `npm run build` – type-check then build for production
+- `npm run preview` – preview the production build
+- `npm run lint` – run ESLint
+
+
+
