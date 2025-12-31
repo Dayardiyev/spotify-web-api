@@ -17,7 +17,7 @@ React + Vite app that connects to the Spotify Web API. After authenticating with
 
 ## Prerequisites
 - Node.js 18+ and npm
-- A Spotify Developer app (https://developer.spotify.com/dashboard) with **Client ID**, **Client Secret**, and a Redirect URI matching your local/dev URL (e.g. `http://localhost:5173`)
+- A Spotify Developer app (https://developer.spotify.com/dashboard) with **Client ID**, **Client Secret**, and a Redirect URI matching your local/dev URL (e.g. `http://127.0.0.1:5173`)
 
 ## Environment variables
 Create a `.env` file in the project root (Vite requires the `VITE_` prefix):
@@ -39,7 +39,7 @@ Also add the same redirect URI in your Spotify app settings.
    ```bash path=null start=null
    npm run dev
    ```
-   Vite will print a local URL (default `http://localhost:5173`). Open it and click **Login with Spotify** to authorize.
+   Vite will print a local URL (default `http://127.0.0.1:5173`). Open it and click **Login with Spotify** to authorize.
 
 ## Available scripts
 - `npm run dev` – start Vite dev server
